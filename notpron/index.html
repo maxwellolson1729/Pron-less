@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- try borrowing some old tricks... wouldn't pron be nice? -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pron-less Grid Solver</title>
+  <style>
+    :root{--ink:#251a2c;--muted:#6d6274;--paper:#fffaf6;--card:#fff;--pink:#f6b6c6;--purple:#800080;--yellow:#ffa300;--line:#eadfe7;--accent:#5d2c78}
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(145deg,#fff9f4,#f8f0fb);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+    main{width:min(980px,calc(100% - 32px));margin:38px auto 70px}.eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;font-weight:800;color:var(--accent)}
+    h1{font:700 clamp(2rem,5vw,4rem)/1.02 Georgia,serif;margin:.25rem 0 .7rem} .lede{max-width:680px;color:var(--muted);font-size:1.06rem;margin:0 0 24px}
+    .panel{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 16px 50px #5d2c7812}
+    .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.upload{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;padding:12px 18px;border-radius:999px;font-weight:750;cursor:pointer}.upload input{position:absolute;opacity:0;pointer-events:none}
+    button{font:inherit;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:11px 17px;font-weight:700;cursor:pointer}button:hover{transform:translateY(-1px)}button:focus-visible,.cell:focus-visible{outline:3px solid #419cff;outline-offset:3px}
+    .status{margin:16px 0 0;color:var(--muted)}.workspace{display:grid;grid-template-columns:minmax(250px,390px) 1fr;gap:28px;margin-top:24px;align-items:start}
+    .grid{display:grid;grid-template-columns:repeat(5,1fr);aspect-ratio:1;border:2px solid var(--ink);background:var(--ink);gap:2px}.cell{border:0;border-radius:0;padding:0;min-width:0;position:relative}.cell[data-v="0"]{background:var(--pink)}.cell[data-v="1"]{background:var(--purple)}.cell[data-v="2"]{background:var(--yellow)}
+    .cell.solution::after{content:attr(data-clicks);position:absolute;inset:50% auto auto 50%;translate:-50% -50%;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#fff;color:#251a2c;font-weight:900;box-shadow:0 2px 9px #0004}
+    .legend{display:flex;gap:15px;flex-wrap:wrap;margin:12px 0 0;color:var(--muted);font-size:.9rem}.swatch{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+    .results h2{margin:0 0 8px;font:700 1.5rem Georgia,serif}.count{font-size:2.3rem;font-weight:850;margin:7px 0}.moves{margin:14px 0 0;padding-left:22px}.moves li{margin:7px 0}.note{color:var(--muted);font-size:.92rem}.hidden{display:none!important}canvas{display:none}
+    @media(max-width:720px){main{margin-top:24px}.panel{padding:18px}.workspace{grid-template-columns:1fr}.grid{max-width:420px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">u/: puzzledpuzzler Presents:</div>
+  <h1>Pron-less Grid Solver</h1>
+  <p class="lede"><strong>might be helpful with notpron level -17, or something, idk... might even earn you a hint for level -20, idefk</strong></p>
+  <p class="lede">So you don't have the time either, eh? Screenshot that shit and throw it in here. You're welcome.</p>
+  <section class="panel">
+    <div class="controls">
+      <label class="upload">Choose screenshot<input id="file" type="file" accept="image/*"></label>
+    </div>
+    <p id="status" class="status">Waiting for your screenshot. Crop it close to the square board for best results.</p>
+    <div class="workspace">
+      <div>
+        <div id="grid" class="grid" aria-label="Detected 5 by 5 grid"></div>
+        <div class="legend"><span><i class="swatch" style="background:var(--pink)"></i>Pink</span><span><i class="swatch" style="background:var(--purple)"></i>Purple</span><span><i class="swatch" style="background:var(--yellow)"></i>Yellow</span></div>
+      </div>
+      <div id="results" class="results">
+        <h2>Minimum solution</h2>
+        <p class="note">The numbered circles will appear on the board.</p>
+        <div id="count" class="count">—</div>
+        <ol id="moves" class="moves"></ol>
+      </div>
+    </div>
+  </section>
+  <canvas id="canvas"></canvas>
+</main>
+<script>
+const N=5, PINK=0, PURPLE=1, YELLOW=2;
+// Target copied from the supplied reference image.
+const target=[2,0,1,0,2, 0,1,0,1,0, 1,0,2,0,1, 0,1,0,1,0, 2,0,1,0,2];
+let board=target.slice();
+const grid=document.querySelector('#grid'),statusEl=document.querySelector('#status'),movesEl=document.querySelector('#moves'),countEl=document.querySelector('#count');
+function render(){grid.innerHTML='';board.forEach((v,i)=>{const cell=document.createElement('div');cell.className='cell';cell.dataset.v=v;cell.role='gridcell';cell.ariaLabel=`Row ${Math.floor(i/N)+1}, column ${i%N+1}`;grid.append(cell)})}
+function clearSolution(){[...grid.children].forEach(x=>{x.classList.remove('solution');delete x.dataset.clicks});movesEl.innerHTML='';countEl.textContent='—'}
+function mod(x){return ((x%3)+3)%3}
+function matrix(){return Array.from({length:25},(_,cell)=>Array.from({length:25},(_,press)=>{const r=Math.floor(press/N),c=press%N,rr=Math.floor(cell/N),cc=cell%N;return Math.abs(r-rr)+Math.abs(c-cc)<=1?1:0}))}
+function solveMinimum(){
+  const A=matrix().map((row,i)=>[...row,mod(target[i]-board[i])]);let row=0,pivots=[];
+  for(let col=0;col<25&&row<25;col++){let p=row;while(p<25&&A[p][col]===0)p++;if(p===25)continue;[A[row],A[p]]=[A[p],A[row]];if(A[row][col]===2)A[row]=A[row].map(v=>mod(v*2));for(let r=0;r<25;r++)if(r!==row&&A[r][col]){const f=A[r][col];A[r]=A[r].map((v,j)=>mod(v-f*A[row][j]))}pivots.push(col);row++}
+  for(let r=row;r<25;r++)if(A[r].slice(0,25).every(v=>v===0)&&A[r][25]!==0)return null;
+  const free=[];for(let c=0;c<25;c++)if(!pivots.includes(c))free.push(c);
+  let best=null,bestCost=Infinity,total=3**free.length;
+  for(let mask=0;mask<total;mask++){let code=mask,x=Array(25).fill(0);for(const c of free){x[c]=code%3;code=Math.floor(code/3)}for(let r=pivots.length-1;r>=0;r--){const c=pivots[r];let sum=A[r][25];for(let j=c+1;j<25;j++)sum-=A[r][j]*x[j];x[c]=mod(sum)}const cost=x.reduce((a,b)=>a+b,0);if(cost<bestCost){best=x;bestCost=cost}}
+  return {x:best,cost:bestCost};
+}
+function showSolution(){clearSolution();const ans=solveMinimum();if(!ans){statusEl.textContent='This grid cannot reach the target pattern.';return}const list=[];ans.x.forEach((n,i)=>{if(!n)return;const cell=grid.children[i];cell.classList.add('solution');cell.dataset.clicks=n;list.push({r:Math.floor(i/N)+1,c:i%N+1,n})});countEl.textContent=`${ans.cost} click${ans.cost===1?'':'s'}`;movesEl.innerHTML=list.length?list.map(m=>`<li>Row ${m.r}, column ${m.c}${m.n===2?' — click twice':''}</li>`).join(''):'<li>Already solved.</li>';statusEl.textContent='Solution found. Order does not matter.'}
+function nearest(r,g,b){const refs=[[246,182,198],[128,0,128],[255,163,0]];let best=0,d=Infinity;refs.forEach((q,i)=>{const z=(r-q[0])**2+(g-q[1])**2+(b-q[2])**2;if(z<d){d=z;best=i}});return best}
+document.querySelector('#file').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{const c=document.querySelector('#canvas'),ctx=c.getContext('2d',{willReadFrequently:true});c.width=img.naturalWidth;c.height=img.naturalHeight;ctx.drawImage(img,0,0);board=[];for(let r=0;r<N;r++)for(let col=0;col<N;col++){const x=Math.min(c.width-1,Math.floor((col+.5)*c.width/N)),y=Math.min(c.height-1,Math.floor((r+.5)*c.height/N));const p=ctx.getImageData(x,y,1,1).data;board.push(nearest(p[0],p[1],p[2]))}URL.revokeObjectURL(img.src);render();showSolution()};img.src=URL.createObjectURL(f)});
+render();
+</script>
+</body>
+<BR>
+Fun to be had at the source
+<BR>
+</html>
