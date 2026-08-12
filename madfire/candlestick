@@ -1,0 +1,15 @@
+<html>
+
+<head>
+  <title>some can see it, some can't</title>
+  <audio src="sound1.mp3" autoplay loop></audio>
+</head>
+<body bgcolor="#000000">
+<center>
+<img
+      src="screen12.jpg"
+      border="0"
+      alt="">
+</center>
+</body>
+</html>
