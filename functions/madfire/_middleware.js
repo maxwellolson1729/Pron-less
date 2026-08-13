@@ -1,15 +1,42 @@
-<script>
-  function passwordPrompt() {
-    const username = prompt("Username:");
-    const password = prompt("Password:");
+export async function onRequest(context) {
+  const authorization =
+    context.request.headers.get("Authorization");
+
+  if (!authorization?.startsWith("Basic ")) {
+    return requestPassword();
+  }
+
+  try {
+    const encoded = authorization.substring(6);
+    const decoded = atob(encoded);
+    const separator = decoded.indexOf(":");
+
+    const username = decoded.substring(0, separator);
+    const password = decoded.substring(separator + 1);
 
     if (
-      username?.toLowerCase() === "power" &&
-      password?.toLowerCase() === "bank"
+      username === context.env.PUZZLE_USERNAME &&
+      password === context.env.PUZZLE_PASSWORD
     ) {
-      window.location.href = "/work/level5.htm";
-    } else {
-      alert("Incorrect username or password.");
+      return context.next();
     }
+  } catch (error) {
+    // Invalid authorization information
   }
-</script>
+
+  return requestPassword();
+}
+
+function requestPassword() {
+  return new Response("Authorization Required", {
+    status: 401,
+
+    headers: {
+      "WWW-Authenticate":
+        'Basic realm="Level 4", charset="UTF-8"',
+
+      "Content-Type":
+        "text/plain; charset=UTF-8"
+    }
+  });
+}
