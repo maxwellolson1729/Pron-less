@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Not Found</title>
+  <style>
+    body {
+      margin: 18px;
+      color: #000000;
+      background-color: #ffffff;
+      font-family: "Times New Roman", Times, serif;}
+    h1 {
+      margin: 0 0 45px;
+      font-size: 64px;}
+    p {
+      margin: 0;
+      font-size: 32px;}
+  </style>
+</head>
+<body>
+  <h1>Not Found</h1>
+  <p>
+    The requested URL <span id="missing-url"></span> was not found on this server.
+  </p>
+  <script>
+    document.getElementById("missing-url").textContent =
+      window.location.pathname;
+  </script>
+</body>
+</html>
