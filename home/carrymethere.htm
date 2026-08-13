@@ -1,32 +1,23 @@
 <html>
 
 <head>
-
   <title>Guess it wasn't so smart after all</title>
-
   <link rel="stylesheet" href="/style.css">
-
   <audio src="sound1.mp3" autoplay loop></audio>
 
   <style>
     body {
-      text-align: center;
-    }
+      text-align: center;}
   </style>
 
   <script>
     function enterPassword() {
       const username = prompt("Username:");
-
       if (username === null) {
-        return;
-      }
-
+        return;}
       const password = prompt("Password:");
-
       if (password === null) {
-        return;
-      }
+        return;}
 
       if (
         username.trim().toLowerCase() === "power" &&
@@ -42,28 +33,22 @@
 </head>
 
 <body>
-
   <img
     src="screen4.jpg"
     width="640"
     height="580"
     border="0"
     usemap="#level4"
-    alt=""
-  >
+    alt="">
 
   <map name="level4">
-
     <area
       shape="rect"
       coords="473,446,555,524"
       href="#"
       onclick="enterPassword(); return false;"
-      alt="Power bank"
-    >
-
+      alt="Power bank">
   </map>
 
 </body>
-
 </html>
