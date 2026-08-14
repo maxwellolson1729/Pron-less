@@ -2,33 +2,16 @@
 
 <head>
   <title>Drinks at the bar</title>
+
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/madfire/level6.css">
+
   <audio src="sound1.mp3" autoplay loop></audio>
 </head>
-<script>
-  document.addEventListener("selectionchange", function () {
-    const selection = window.getSelection();
-    const trigger = document.querySelector(".selection-layer");
-    const panel = document.querySelector(".panel");
 
-    if (!selection || selection.isCollapsed) {
-      panel.classList.remove("revealed");
-      return;
-    }
-
-    const selectedInsideTrigger =
-      trigger.contains(selection.anchorNode) &&
-      trigger.contains(selection.focusNode);
-
-    panel.classList.toggle(
-      "revealed",
-      selectedInsideTrigger
-    );
-  });
-</script>
 <body>
   <center>
+
     <img
       src="yaylevel6.jpg"
       width="580"
@@ -45,21 +28,56 @@
         alt="Continue">
     </map>
 
-    <div class="panel">
-  <img
-    src="scanme.png"
-    class="image"
-    alt="">
 
-  <span class="selection-layer"></span>
-</div>
+    <div class="panel">
+
+      <img
+        src="scanme.png"
+        class="image"
+        alt="">
+
+      <span class="selection-layer">
+        drag across this hidden area to reveal what is underneath
+      </span>
+
+    </div>
+
+
     <div class="direction">
       <div class="arrow">↑</div>
       <div class="direction-word">up</div>
     </div>
+
+
+    <!-- Code-128, you brighten my day -->
+
   </center>
+
+
+  <script>
+    document.addEventListener("selectionchange", function () {
+      const selection = window.getSelection();
+      const trigger =
+        document.querySelector(".selection-layer");
+      const panel =
+        document.querySelector(".panel");
+
+      if (!selection || selection.isCollapsed) {
+        panel.classList.remove("revealed");
+        return;
+      }
+
+      const selectedInsideTrigger =
+        trigger.contains(selection.anchorNode) &&
+        trigger.contains(selection.focusNode);
+
+      panel.classList.toggle(
+        "revealed",
+        selectedInsideTrigger
+      );
+    });
+  </script>
+
 </body>
 
 </html>
-
-<!-- Code-128, you brighten my day --> 
