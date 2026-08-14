@@ -1,0 +1,28 @@
+.footer-mark {
+  width: 540px;
+  height: 135px;
+  margin: 6em auto 0;
+  background-image: url("scanme.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.direction {
+  margin-top: 6em;
+  color: #151515;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.arrow {
+  font-size: 70px;
+  font-weight: bold;
+  line-height: 0.8;
+}
+
+.direction-word {
+  margin-top: 14px;
+  font-size: 20px;
+  font-weight: bold;
+}
