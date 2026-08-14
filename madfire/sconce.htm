@@ -9,11 +9,11 @@
 <script>
   document.addEventListener("selectionchange", function () {
     const selection = window.getSelection();
-    const trigger = document.querySelector(".select-trigger");
-    const barcode = document.querySelector(".barcode-shell");
+    const trigger = document.querySelector(".selection-layer");
+    const panel = document.querySelector(".panel");
 
     if (!selection || selection.isCollapsed) {
-      barcode.classList.remove("revealed");
+      panel.classList.remove("revealed");
       return;
     }
 
@@ -21,7 +21,7 @@
       trigger.contains(selection.anchorNode) &&
       trigger.contains(selection.focusNode);
 
-    barcode.classList.toggle(
+    panel.classList.toggle(
       "revealed",
       selectedInsideTrigger
     );
@@ -45,17 +45,14 @@
         alt="Continue">
     </map>
 
-    <div class="barcode-shell">
+    <div class="panel">
   <img
     src="scanme.png"
-    class="barcode-image"
+    class="image"
     alt="">
 
-  <span class="select-trigger">
-    drag across this hidden area to reveal what is underneath
-  </span>
+  <span class="selection-layer"></span>
 </div>
-
     <div class="direction">
       <div class="arrow">↑</div>
       <div class="direction-word">up</div>
