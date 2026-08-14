@@ -1,32 +1,30 @@
-body {
-  background-color: #060606;
-}
-
-.footer-mark {
-  width: 540px;
-  height: 135px;
+.barcode-shell {
+  width: 500px;
+  height: 125px;
   margin: 6em auto 0;
-  background-image: url("scanme.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
-
-.direction {
-  margin-top: 6em;
-  color: #151515;
-  font-family: Arial, sans-serif;
+  overflow: visible;
   text-align: center;
 }
 
-.arrow {
-  font-size: 70px;
-  font-weight: bold;
-  line-height: 0.8;
+.barcode-text {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  color: #000000;
+  background: transparent;
+  font-family: monospace;
+  font-size: 1px;
+  line-height: 1px;
+  letter-spacing: 0.4px;
+  white-space: pre;
+  cursor: text;
+  user-select: text;
+
+  transform: scaleX(0.8) scaleY(120);
+  transform-origin: top center;
 }
 
-.direction-word {
-  margin-top: 14px;
-  font-size: 20px;
-  font-weight: bold;
+.barcode-text::selection {
+  color: #000000;
+  background-color: #ffffff;
 }
