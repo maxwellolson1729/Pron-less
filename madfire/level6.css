@@ -31,9 +31,9 @@ body {
 
   background: radial-gradient(
     ellipse at center,
-    #242424 0%,
-    #242424 55%,
-    #171717 68%,
+    #202020 0%,
+    #181818 55%,
+    #121212 68%,
     #080808 77%,
     transparent 86%
   );
