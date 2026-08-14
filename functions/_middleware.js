@@ -1,0 +1,86 @@
+export async function onRequest(context) {
+  const url = new URL(context.request.url);
+
+  const protectedPages = {
+    "/madfire/index.htm": {
+      username: context.env.LEVEL4_USERNAME,
+      password: context.env.LEVEL4_PASSWORD,
+      realm: "Level 4"
+    },
+
+    "/madfire/sconce.htm": {
+      username: context.env.LEVEL5_USERNAME,
+      password: context.env.LEVEL5_PASSWORD,
+      realm: "Level 5"
+    },
+
+    "/nextfolder/level6.htm": {
+      username: context.env.LEVEL6_USERNAME,
+      password: context.env.LEVEL6_PASSWORD,
+      realm: "Level 6"
+    },
+
+    "/anotherfolder/level7.htm": {
+      username: context.env.LEVEL7_USERNAME,
+      password: context.env.LEVEL7_PASSWORD,
+      realm: "Level 7"
+    },
+
+    "/finalfolder/level8.htm": {
+      username: context.env.LEVEL8_USERNAME,
+      password: context.env.LEVEL8_PASSWORD,
+      realm: "Level 8"
+    }
+  };
+
+  const protectedPage = protectedPages[url.pathname];
+
+  // Allow pages and files that aren't listed above.
+  if (!protectedPage) {
+    return context.next();
+  }
+
+  const authorization =
+    context.request.headers.get("Authorization");
+
+  if (!authorization?.startsWith("Basic ")) {
+    return requestPassword(protectedPage.realm);
+  }
+
+  try {
+    const encoded = authorization.substring(6);
+    const decoded = atob(encoded);
+    const separator = decoded.indexOf(":");
+
+    if (separator === -1) {
+      return requestPassword(protectedPage.realm);
+    }
+
+    const username = decoded.substring(0, separator);
+    const password = decoded.substring(separator + 1);
+
+    if (
+      username === protectedPage.username &&
+      password === protectedPage.password
+    ) {
+      return context.next();
+    }
+  } catch (error) {
+    // Invalid authorization information
+  }
+
+  return requestPassword(protectedPage.realm);
+}
+
+function requestPassword(realm) {
+  return new Response("Authorization Required", {
+    status: 401,
+    headers: {
+      "WWW-Authenticate":
+        `Basic realm="${realm}", charset="UTF-8"`,
+
+      "Content-Type":
+        "text/plain; charset=UTF-8"
+    }
+  });
+}
