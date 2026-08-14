@@ -1,54 +1,32 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <title>Guess it wasn't so smart after all</title>
+  <meta charset="UTF-8">
+  <title>Level 4</title>
   <link rel="stylesheet" href="/style.css">
+
   <audio src="sound1.mp3" autoplay loop></audio>
-
-  <style>
-    body {
-      text-align: center;}
-  </style>
-
-  <script>
-    function enterPassword() {
-      const username = prompt("Username:");
-      if (username === null) {
-        return;}
-      const password = prompt("Password:");
-      if (password === null) {
-        return;}
-
-      if (
-        username.trim().toLowerCase() === "power" &&
-        password.trim().toLowerCase() === "bank"
-      ) {
-        window.location.href = "/madfire/index.htm";
-      } else {
-        alert("Incorrect username or password.");
-      }
-    }
-  </script>
-
 </head>
 
 <body>
-  <img
-    src="screen4.jpg"
-    width="640"
-    height="580"
-    border="0"
-    usemap="#level4"
-    alt="">
+  <center>
+    <img
+      src="screen4.jpg"
+      width="640"
+      height="580"
+      border="0"
+      usemap="#powerbank"
+      alt="">
 
-  <map name="level4">
-    <area
-      shape="rect"
-      coords="473,446,555,524"
-      href="#"
-      onclick="enterPassword(); return false;"
-      alt="Power bank">
-  </map>
-
+    <map name="powerbank">
+      <area
+        shape="rect"
+        coords="365,455,545,530"
+        href="/madfire/index.htm"
+        alt="Power bank">
+    </map>
+  </center>
 </body>
+
 </html>
