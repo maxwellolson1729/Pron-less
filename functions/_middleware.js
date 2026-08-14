@@ -14,7 +14,7 @@ export async function onRequest(context) {
       realm: "Level 5"
     },
 
-    "/nextfolder/level6.htm": {
+    "/madfire/turbo.htm": {
       username: context.env.LEVEL6_USERNAME,
       password: context.env.LEVEL6_PASSWORD,
       realm: "Level 6"
