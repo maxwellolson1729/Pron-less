@@ -6,7 +6,27 @@
   <link rel="stylesheet" href="/madfire/level6.css">
   <audio src="sound1.mp3" autoplay loop></audio>
 </head>
+<script>
+  document.addEventListener("selectionchange", function () {
+    const selection = window.getSelection();
+    const trigger = document.querySelector(".select-trigger");
+    const barcode = document.querySelector(".barcode-shell");
 
+    if (!selection || selection.isCollapsed) {
+      barcode.classList.remove("revealed");
+      return;
+    }
+
+    const selectedInsideTrigger =
+      trigger.contains(selection.anchorNode) &&
+      trigger.contains(selection.focusNode);
+
+    barcode.classList.toggle(
+      "revealed",
+      selectedInsideTrigger
+    );
+  });
+</script>
 <body>
   <center>
     <img
@@ -26,7 +46,14 @@
     </map>
 
     <div class="barcode-shell">
-<pre class="barcode-text">           █████   ██     ██           ██     ██████████     ██   ███████      ██     █████   ████   █████     █████     ██   ██████████     ███     ██           ████   ██      ████      ██   ██          █████     ██   ██           ████   █████   █████████   █████   ████      ████      ██   ██     ██████████      ███████     ██     █████   █████  █████      ████      ██   ██     ██████████     ██      █████████      ██   ██     ██████████   ██     ██      █████████   ███     █████  █████   ██████████   ██  ███     ██████████     █████        ███████   ██   ████             </pre>
+  <img
+    src="scanme.png"
+    class="barcode-image"
+    alt="">
+
+  <span class="select-trigger">
+    drag across this hidden area to reveal what is underneath
+  </span>
 </div>
 
     <div class="direction">
