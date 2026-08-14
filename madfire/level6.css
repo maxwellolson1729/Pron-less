@@ -1,3 +1,12 @@
+/* Level 6 page */
+
+body {
+  background-color: #000000;
+}
+
+
+/* Hidden barcode area */
+
 .barcode-shell {
   position: relative;
   width: 500px;
@@ -6,6 +15,9 @@
   overflow: visible;
   background: transparent;
 }
+
+
+/* Soft background revealed when hidden text is selected */
 
 .barcode-shell::before {
   content: "";
@@ -30,23 +42,38 @@
   opacity: 1;
 }
 
+
+/* Genuine transparent barcode image */
+
 .barcode-image {
   position: absolute;
   inset: 0;
   z-index: 1;
+
   width: 100%;
   height: 100%;
+
   object-fit: contain;
 }
+
+
+/* Invisible selectable text over the barcode */
 
 .select-trigger {
   position: absolute;
   inset: 0;
   z-index: 2;
+
   display: block;
+  overflow: hidden;
+
   color: transparent;
+  background: transparent;
+
+  font-family: Arial, sans-serif;
   font-size: 30px;
   line-height: 1.4;
+
   cursor: text;
   user-select: text;
 }
@@ -54,4 +81,28 @@
 .select-trigger::selection {
   color: transparent;
   background-color: transparent;
+}
+
+
+/* Faint arrow and “up” clue */
+
+.direction {
+  margin-top: 12em;
+
+  color: #151515;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.arrow {
+  font-size: 70px;
+  font-weight: bold;
+  line-height: 0.8;
+}
+
+.direction-word {
+  margin-top: 14px;
+
+  font-size: 20px;
+  font-weight: bold;
 }
