@@ -3,13 +3,37 @@
   width: 500px;
   height: 125px;
   margin: 6em auto 0;
-  overflow: hidden;
-  background-color: #000000;
+  overflow: visible;
+  background: transparent;
+}
+
+.barcode-shell::before {
+  content: "";
+  position: absolute;
+  inset: -25px;
+  z-index: 0;
+
+  background: radial-gradient(
+    ellipse at center,
+    #242424 0%,
+    #181818 45%,
+    #0a0a0a 72%,
+    transparent 100%
+  );
+
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 0.35s ease;
+}
+
+.barcode-shell.revealed::before {
+  opacity: 1;
 }
 
 .barcode-image {
   position: absolute;
   inset: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -30,8 +54,4 @@
 .select-trigger::selection {
   color: transparent;
   background-color: transparent;
-}
-
-.barcode-shell.revealed {
-  background-color: #ffffff;
 }
