@@ -22,26 +22,22 @@ body {
 .barcode-shell::before {
   content: "";
   position: absolute;
-  inset: -25px;
+  inset: -18px;
   z-index: 0;
 
   background: radial-gradient(
     ellipse at center,
     #242424 0%,
-    #181818 45%,
-    #0a0a0a 72%,
-    transparent 100%
+    #242424 55%,
+    #171717 68%,
+    #080808 77%,
+    transparent 86%
   );
 
   opacity: 0;
-  filter: blur(10px);
+  filter: blur(5px);
   transition: opacity 0.35s ease;
 }
-
-.barcode-shell.revealed::before {
-  opacity: 1;
-}
-
 
 /* Genuine transparent barcode image */
 
