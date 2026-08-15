@@ -1,3 +1,23 @@
-.color-secret {
-  filter: grayscale(100%);
+.color-puzzle {
+  position: relative;
+  width: 600px;
+  height: 800px;
+  margin: 0 auto;
+}
+
+.secret-image {
+  display: block;
+  width: 600px;
+  height: 800px;
+}
+
+.image-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: block;
+  width: 600px;
+  height: 800px;
+  pointer-events: none;
 }
