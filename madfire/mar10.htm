@@ -1,1 +1,58 @@
+<html>
 
+<head>
+  <title>Verification Required</title>
+
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/madfire/level11.css">
+
+  <audio src="sound1.mp3" autoplay loop></audio>
+</head>
+
+<body>
+  <center>
+
+    <div id="captcha" class="captcha" aria-live="polite">
+      <div class="captcha-header">
+        <div class="captcha-small">Prove you're human.</div>
+        <div id="captcha-instruction" class="captcha-instruction">
+          Select all squares containing the cable connected to the red plug.
+        </div>
+        <div class="captcha-small">If there are none, click skip.</div>
+      </div>
+
+      <div id="captcha-grid" class="captcha-grid cable-grid"></div>
+
+      <div id="captcha-message" class="captcha-message"></div>
+
+      <div class="captcha-controls">
+        <div class="captcha-tools">
+          <button id="captcha-refresh" class="captcha-tool" type="button" aria-label="Get a new challenge">↻</button>
+          <button id="captcha-audio" class="captcha-tool" type="button" aria-label="Get an audio challenge">◖))</button>
+          <button id="captcha-info" class="captcha-tool" type="button" aria-label="Help">ⓘ</button>
+        </div>
+
+        <button id="captcha-verify" class="captcha-verify" type="button">VERIFY</button>
+
+        <a
+          id="captcha-continue"
+          class="captcha-verify captcha-hidden"
+          href="/madfire/candlestick.htm"
+          onclick="alert('Password Hint:\nUsername: What are you?\nPassword: Read what you selected.')">
+          CONTINUE
+        </a>
+      </div>
+
+      <div class="captcha-brand">
+        <span class="captcha-logo">↻</span>
+        <span>reHUMAN</span>
+        <small>Privacy · Terms</small>
+      </div>
+    </div>
+
+  </center>
+
+  <script src="level11.js"></script>
+</body>
+
+</html>
