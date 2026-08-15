@@ -1,7 +1,7 @@
 export async function onRequest(context) {
   const url = new URL(context.request.url);
 
-  // Redirect the tempting wrong answer to a hint image.
+  // Redirect the tempting Level 8 wrong answer to a hint image.
   if (url.pathname === "/madfire/screen8.zip") {
     return Response.redirect(
       new URL("/madfire/notquite.jpg", context.request.url),
@@ -9,7 +9,6 @@ export async function onRequest(context) {
     );
   }
 
-  //Master U/P list
   const protectedPages = {
     "/madfire/index.htm": {
       username: context.env.LEVEL4_USERNAME,
@@ -34,20 +33,25 @@ export async function onRequest(context) {
       password: context.env.LEVEL7_PASSWORD,
       realm: "Level 7"
     },
-    
+
     "/finalfolder/level8.htm": {
       username: context.env.LEVEL8_USERNAME,
       password: context.env.LEVEL8_PASSWORD,
       realm: "Level 8"
     },
-   
+
     "/madfire/10.htm": {
       username: context.env.LEVEL9_USERNAME,
       password: context.env.LEVEL9_PASSWORD,
       realm: "Level 9"
+    },
+
+    "/madfire/candlestick.htm": {
+      username: context.env.LEVEL11_USERNAME,
+      password: context.env.LEVEL11_PASSWORD,
+      realm: "Level 11"
     }
   };
-  
 
   const protectedPage = protectedPages[url.pathname];
 
@@ -100,4 +104,3 @@ function requestPassword(realm) {
     }
   });
 }
-
