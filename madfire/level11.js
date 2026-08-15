@@ -1,28 +1,20 @@
 (function () {
   const grid =
     document.getElementById("captcha-grid");
-
   const instruction =
     document.getElementById("captcha-instruction");
-
   const message =
     document.getElementById("captcha-message");
-
   const verify =
     document.getElementById("captcha-verify");
-
   const continueButton =
     document.getElementById("captcha-continue");
-
   const refresh =
     document.getElementById("captcha-refresh");
-
   const audio =
     document.getElementById("captcha-audio");
-
   const info =
     document.getElementById("captcha-info");
-
   const imageTiles = [
     {
       src: "glove.jpg",
