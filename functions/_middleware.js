@@ -39,8 +39,15 @@ export async function onRequest(context) {
       username: context.env.LEVEL8_USERNAME,
       password: context.env.LEVEL8_PASSWORD,
       realm: "Level 8"
+    },
+   
+    "/madfire/10.htm": {
+      username: context.env.LEVEL9_USERNAME,
+      password: context.env.LEVEL9_PASSWORD,
+      realm: "Level 9"
     }
   };
+  
 
   const protectedPage = protectedPages[url.pathname];
 
