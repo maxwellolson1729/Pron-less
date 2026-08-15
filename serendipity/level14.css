@@ -11,13 +11,18 @@
   height: 800px;
 }
 
-.image-cover {
+.color-puzzle::after {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
-  display: block;
   width: 600px;
   height: 800px;
+  background-image:
+    url("/serendipity/screen14-cover.jpg?v=7");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 600px 800px;
   pointer-events: none;
 }
