@@ -189,3 +189,64 @@
     height: calc(96vw - 18px);
   }
 }
+
+/* Page introduction */
+
+.level-warning {
+  width: 480px;
+  margin: 30px auto 16px;
+  color: #d8d8d8;
+  font-family: "Courier New", Courier, monospace;
+  text-align: left;
+}
+
+.warning-title {
+  color: #fff;
+  font-size: 19px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 0.35);
+}
+
+.warning-message {
+  margin-top: 7px;
+  color: #bcbcbc;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+
+/* CAPTCHA level number */
+
+.captcha {
+  position: relative;
+  margin-top: 0;
+}
+
+.captcha-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.captcha-level {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow:
+    -1px -1px 0 #1f5f9f,
+     1px -1px 0 #1f5f9f,
+    -1px  1px 0 #1f5f9f,
+     1px  1px 0 #1f5f9f,
+     0 0 6px rgba(255, 255, 255, 0.35);
+}
+
+.captcha-header-text {
+  flex: 1;
+  min-width: 0;
+}
