@@ -2,7 +2,7 @@ export async function onRequest(context) {
   const url = new URL(context.request.url);
 
   // Redirect the tempting wrong answer to a hint image.
-  if (url.pathname === "/madfire/persia.zip") {
+  if (url.pathname === "/madfire/screen8.zip") {
     return Response.redirect(
       new URL("/madfire/notquite.jpg", context.request.url),
       302
