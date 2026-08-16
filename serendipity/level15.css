@@ -1,23 +1,16 @@
 .level15-plate {
   position: relative;
   width: 800px;
-  height: 800px;
-}
+  height: 800px;}
 
 .level15-plate::after {
   content: "";
   position: absolute;
   inset: 0;
   background: url("vision145.png") center / 800px 800px no-repeat;
-  pointer-events: none;
-}
+  pointer-events: none;}
 
 .level15-plate img {
   display: block;
   width: 800px;
-  height: 800px;
-}
-
-.level15-plate:hover {
-  cursor: help;
-}
+  height: 800px;}
