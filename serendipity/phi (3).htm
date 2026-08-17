@@ -1,14 +1,19 @@
 <html>
+
 <head>
-<title>Outside chance</title>
+  <title>Outside chance</title>
+  <link rel="stylesheet" href="/style.css">
+  <audio src="sound1.mp3" autoplay loop></audio>
 </head>
-<body bgcolor="#ffffff">
-<div style="position:absolute;top:15px;left:15px;color:#000000;font-family:Arial,sans-serif;font-size:48px;font-weight:bold;">18</div>
+
+<body>
+
 <center>
-<div id="grid" style="display:grid;grid-template-columns:repeat(24,30px);grid-auto-rows:30px;width:720px;font-size:25px;line-height:30px;margin-top:30px;"></div>
+<div style="width:720px;margin-top:20px;text-align:left;height:65px;color:#ffffff;font-family:Arial,sans-serif;font-size:48px;font-weight:bold;-webkit-text-stroke:1px #000000;text-shadow:1px 1px 0 #000000;">18</div>
+<div id="grid" style="display:grid;grid-template-columns:repeat(24,30px);grid-auto-rows:30px;width:720px;font-size:25px;line-height:30px;"></div>
 <script>
 const rows=[
-"➡😇😈😈😇😇😇😈😇😇😈😈😇😈😈😇😇😇😈😈😇😈😈⬇",
+"→😇😈😈😇😇😇😈😇😇😈😈😇😈😈😇😇😇😈😈😇😈😈↓",
 "😈😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😈",
 "😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😈",
 "😈😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇",
@@ -31,11 +36,20 @@ const rows=[
 "😈😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😈",
 "😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😈",
 "😈😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇😇",
-"⬆😈😇😇😈😈😈😇😈😇😇😇😈😇😇😈😈😈😇😈😇😈😇⬅"
+"↑😈😇😇😈😈😈😇😈😇😇😇😈😇😇😈😈😈😇😈😇😈😇←"
 ];
 const grid=document.getElementById("grid");
-for(const character of rows.join("")){const cell=document.createElement("span");cell.textContent=character;grid.appendChild(cell);}
+for(const character of rows.join("")){
+const cell=document.createElement("span");
+cell.textContent=character;
+if("→↓←↑".includes(character)){
+cell.style.color="#ffffff";
+cell.style.fontFamily="Arial,sans-serif";
+cell.style.fontSize="30px";
+cell.style.fontWeight="bold";}
+grid.appendChild(cell);}
 </script>
+
 </center>
 </body>
 </html>
