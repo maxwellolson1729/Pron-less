@@ -50,7 +50,7 @@ export async function onRequest(context) {
       username: context.env.LEVEL11_USERNAME,
       password: context.env.LEVEL11_PASSWORD,
       realm: "Level 11"
-    }
+    },
    
     "/serendipity/vermeer.htm": {
       username: context.env.LEVEL16_USERNAME,
