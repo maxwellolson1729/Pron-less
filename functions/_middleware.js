@@ -8,7 +8,7 @@ export async function onRequest(context) {
       302
     );
   }
-  
+
   const protectedPages = {
     "/madfire/index.htm": {
       username: context.env.LEVEL4_USERNAME,
