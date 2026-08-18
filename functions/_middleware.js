@@ -57,6 +57,12 @@ export async function onRequest(context) {
       password: context.env.LEVEL16_PASSWORD,
       realm: "Level 16"
     },
+    
+    "/spooky/island.htm": {
+      username: context.env.LEVEL20_USERNAME,
+      password: context.env.LEVEL20_PASSWORD,
+      realm: "Level 16"
+    },
   };
 
   const protectedPage = protectedPages[url.pathname];
