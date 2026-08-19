@@ -61,7 +61,13 @@ export async function onRequest(context) {
     "/spooky/island.htm": {
       username: context.env.LEVEL20_USERNAME,
       password: context.env.LEVEL20_PASSWORD,
-      realm: "Level 16"
+      realm: "Level 20"
+    },
+
+    "/spooky/banana.htm": {
+      username: context.env.LEVEL22_USERNAME,
+      password: context.env.LEVEL22_PASSWORD,
+      realm: "Level 22"
     },
   };
 
