@@ -70,7 +70,7 @@ export async function onRequest(context) {
       realm: "Level 22"
     },
 
-     "/spooky/banana.htm": {
+     "/spooky/frizzle.htm": {
       username: context.env.LEVEL23_USERNAME,
       password: context.env.LEVEL23_PASSWORD,
       realm: "Level 23"
