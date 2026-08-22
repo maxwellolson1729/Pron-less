@@ -1,0 +1,46 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <title>31</title>
+  <audio src="/backto/sound1.mp3" autoplay loop></audio>
+  <script>
+    (function () {
+      var tripKey = "gopuzzler_level31_trip";
+      var redirectTimer;
+
+      function showReturnGif() {
+        var image = document.getElementById("level31");
+        if (image) {
+          image.src = "screen31.gif?v=1";
+        }
+      }
+
+      window.addEventListener("pageshow", function () {
+        var stage = sessionStorage.getItem(tripKey);
+
+        if (stage === "waiting-for-back") {
+          window.clearTimeout(redirectTimer);
+          sessionStorage.setItem(tripKey, "forward-ready");
+          showReturnGif();
+          return;
+        }
+
+        if (stage === "forward-ready") {
+          showReturnGif();
+          return;
+        }
+
+        sessionStorage.setItem(tripKey, "waiting-for-back");
+        redirectTimer = window.setTimeout(function () {
+          window.location.assign("/backto/overshot.htm");
+        }, 1500);
+      });
+    }());
+  </script>
+</head>
+<body>
+<center>
+  <img id="level31" src="screen31.jpg" width="600" height="800" border="0" alt="">
+</center>
+</body>
+</html>
