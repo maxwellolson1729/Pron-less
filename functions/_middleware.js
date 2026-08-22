@@ -1,6 +1,31 @@
 export async function onRequest(context) {
   const url = new URL(context.request.url);
 
+// Level 29: apologize to the Google box.
+// Place this inside onRequest(), immediately after:
+// const url = new URL(context.request.url);
+
+if (url.pathname === "/spooky/search.htm") {
+  const submittedPhrase = url.searchParams
+    .get("q")
+    ?.trim()
+    .replace(/\s+/g, " ")
+    .replace(/’/g, "'")
+    .toLowerCase();
+
+  if (submittedPhrase === "i'm sorry") {
+    return Response.redirect(
+      new URL("/spooky/normal.htm", context.request.url),
+      302
+    );
+  }
+
+  return Response.redirect(
+    new URL("/spooky/asusual.htm?ignored=again", context.request.url),
+    302
+  );
+}
+  
   // Redirect the tempting Level 8 wrong answer to a hint image.
   if (url.pathname === "/madfire/screen8.zip") {
     return Response.redirect(
