@@ -15,7 +15,7 @@ if (url.pathname === "/spooky/search.htm") {
 
   if (submittedPhrase === "i'm sorry") {
     return Response.redirect(
-      new URL("/spooky/normal.htm", context.request.url),
+      new URL("/backto/normal.htm", context.request.url),
       302
     );
   }
