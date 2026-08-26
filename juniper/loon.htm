@@ -1,0 +1,449 @@
+<html>
+<head>
+  <title>Do your homework.</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #f7f7f7;
+      color: #2a2a33;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 68px;
+      padding: 0 34px;
+      background: #ffffff;
+      border-bottom: 1px solid #d8d8dc;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #006aff;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -1.2px;
+    }
+
+    .roof {
+      position: relative;
+      width: 27px;
+      height: 22px;
+      border: 3px solid #006aff;
+      border-top: 0;
+      border-radius: 2px;
+    }
+
+    .roof::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 1px;
+      top: -10px;
+      border-left: 3px solid #006aff;
+      border-top: 3px solid #006aff;
+      transform: rotate(45deg);
+      border-radius: 2px 0 0 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .level-button {
+      padding: 10px 16px;
+      border-radius: 4px;
+      background: #006aff;
+      color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 74, 173, 0.24);
+    }
+
+    .level-button:hover,
+    .level-button:focus {
+      background: #0055cc;
+    }
+
+    .search-wrap {
+      padding: 18px 34px;
+      background: #ffffff;
+      border-bottom: 1px solid #e1e1e5;
+    }
+
+    .search {
+      width: min(620px, 100%);
+      height: 46px;
+      padding: 0 48px 0 17px;
+      border: 1px solid #a9a9b2;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #565661;
+      font-size: 15px;
+      line-height: 46px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    main {
+      width: min(1240px, calc(100% - 40px));
+      margin: 28px auto 54px;
+    }
+
+    .listing {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(350px, 0.85fr);
+      background: #ffffff;
+      border: 1px solid #dddddf;
+      border-radius: 10px;
+      box-shadow: 0 7px 24px rgba(24, 24, 35, 0.11);
+    }
+
+    .photo {
+      position: relative;
+      min-height: 540px;
+      background: #111111;
+    }
+
+    .photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .level-number {
+      position: absolute;
+      top: 17px;
+      left: 18px;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 31px;
+      font-weight: 700;
+      line-height: 1;
+      text-shadow:
+        -1px -1px 0 #000000,
+         1px -1px 0 #000000,
+        -1px  1px 0 #000000,
+         1px  1px 0 #000000;
+    }
+
+    .photo-count {
+      position: absolute;
+      right: 18px;
+      bottom: 17px;
+      padding: 8px 12px;
+      border-radius: 4px;
+      background: rgba(20, 20, 24, 0.78);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 30px 30px 26px;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d83b3b;
+    }
+
+    .actions {
+      color: #006aff;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .price {
+      margin: 0 0 9px;
+      color: #1d1d24;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .sold-for {
+      margin-bottom: 20px;
+      color: #696973;
+      font-size: 13px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin: 7px 0 24px;
+      padding: 20px 0;
+      border-top: 1px solid #dddddf;
+      border-bottom: 1px solid #dddddf;
+    }
+
+    .fact {
+      padding: 0 15px;
+      text-align: center;
+      border-right: 1px solid #dddddf;
+    }
+
+    .fact:first-child {
+      padding-left: 0;
+    }
+
+    .fact:last-child {
+      padding-right: 0;
+      border-right: 0;
+    }
+
+    .fact strong {
+      display: block;
+      color: #22222a;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .fact span {
+      display: block;
+      margin-top: 4px;
+      color: #6a6a74;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.55px;
+    }
+
+    .section-title {
+      margin: 0 0 13px;
+      font-size: 19px;
+    }
+
+    .home-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px 20px;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .home-facts div {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eeeeef;
+    }
+
+    .home-facts dt {
+      margin-bottom: 4px;
+      color: #72727b;
+      font-size: 12px;
+    }
+
+    .home-facts dd {
+      margin: 0;
+      color: #2b2b33;
+      font-weight: 700;
+    }
+
+    .notice {
+      margin-top: auto;
+      padding-top: 25px;
+      color: #74747d;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .google-box {
+      grid-column: 1 / -1;
+      overflow-x: auto;
+      padding: 0 24px 28px;
+      background: #ffffff;
+      border-top: 1px solid #e5e5e8;
+      color: #000000;
+      text-align: center;
+    }
+
+    .google-box form,
+    .google-box table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .google-box a {
+      color: #0000ee;
+      font-size: 13px;
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 24px 20px 34px;
+      color: #777780;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        gap: 0;
+      }
+
+      .nav a:not(.level-button) {
+        display: none;
+      }
+
+      .topbar,
+      .search-wrap {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      main {
+        width: min(720px, calc(100% - 24px));
+        margin-top: 18px;
+      }
+
+      .listing {
+        grid-template-columns: 1fr;
+      }
+
+      .photo {
+        min-height: 0;
+        aspect-ratio: 3 / 2;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .details {
+        padding: 24px 20px 22px;
+      }
+
+      .price {
+        font-size: 31px;
+      }
+
+      .home-facts {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" aria-label="Zillhouse">
+      <span class="roof" aria-hidden="true"></span>
+      <span>zillhouse</span>
+    </div>
+    <nav class="nav" aria-label="Property navigation">
+      <a href="#">Buy</a>
+      <a href="#">Rent</a>
+      <a href="#">Sell</a>
+      <a class="level-button" href="/juniper/mittens.htm">Level 34</a>
+      <a href="#">Home loans</a>
+      <a href="#">Research</a>
+    </nav>
+  </header>
+
+  <div class="search-wrap">
+    <div class="search">Enter a neighborhood, city, or ZIP code</div>
+  </div>
+
+  <main>
+    <article class="listing">
+      <div class="photo">
+        <img src="screen33.jpg" alt="Property preview">
+        <span class="level-number">33</span>
+        <span class="photo-count">1 photo</span>
+      </div>
+
+      <section class="details">
+        <div class="status-row">
+          <span class="status"><span class="status-dot"></span> Off market</span>
+          <span class="actions">Save&nbsp;&nbsp;&nbsp; Share</span>
+        </div>
+
+        <h1 class="price">$6,000,000</h1>
+        <div class="sold-for">Last recorded sale price</div>
+
+        <div class="facts">
+          <div class="fact"><strong>4</strong><span>beds</span></div>
+          <div class="fact"><strong>4</strong><span>baths</span></div>
+          <div class="fact"><strong>3,737</strong><span>sqft</span></div>
+        </div>
+
+        <h2 class="section-title">Home details</h2>
+        <dl class="home-facts">
+          <div>
+            <dt>Property type</dt>
+            <dd>Single-family residence</dd>
+          </div>
+          <div>
+            <dt>Year built</dt>
+            <dd>1900</dd>
+          </div>
+          <div>
+            <dt>Lot size</dt>
+            <dd>3,125 sqft</dd>
+          </div>
+          <div>
+            <dt>Price per sqft</dt>
+            <dd>$1,606</dd>
+          </div>
+        </dl>
+
+        <div class="notice">
+          Property information is provided for research purposes and may include public-record data.
+        </div>
+      </section>
+
+      <div class="google-box">
+        <!-- Ignore from here: Google -->
+        <form method="get" action="https://www.google.com/search" target="_top"><p>&nbsp;</p><table bgcolor="#000000"><tr><td nowrap="nowrap" valign="top" align="left" height="32"><a href="../google.htm" target="_blank"><img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" width="92" height="31" border="0" alt="Google" align="middle"></a><input type="text" name="q" size="31" maxlength="255" value=""><input type="submit" value="Search"></td></tr></table><a href="../google.htm" target="_blank">Open Google in a separate window</a></form>
+        <!-- stop ignoring: Google end -->
+      </div>
+    </article>
+  </main>
+
+  <footer>This fictional interface is part of GoPuzzler and is not affiliated with any real-estate service.</footer>
+
+  <!-- It isn't for sale. That doesn't mean it isn't listed. -->
+</body>
+</html>
