@@ -1,29 +1,53 @@
+const faviconRewriter = new HTMLRewriter().on("head", {
+  element(element) {
+    element.append(
+      '<link rel="icon" type="image/x-icon" href="/favicon.ico?v=1">',
+      { html: true }
+    );
+  }
+});
+
+async function serveWithFavicon(context) {
+  const response = await context.next();
+  const contentType =
+    response.headers.get("Content-Type") || "";
+
+  // Only rewrite actual HTML pages.
+  if (!contentType.toLowerCase().includes("text/html")) {
+    return response;
+  }
+
+  return faviconRewriter.transform(response);
+}
+
 export async function onRequest(context) {
   const url = new URL(context.request.url);
 
-// Level 29: apologize to the Google box.
+  // Level 29: apologize to the Google box.
+  if (url.pathname === "/spooky/search.htm") {
+    const submittedPhrase = url.searchParams
+      .get("q")
+      ?.trim()
+      .replace(/\s+/g, " ")
+      .replace(/’/g, "'")
+      .toLowerCase();
 
-if (url.pathname === "/spooky/search.htm") {
-  const submittedPhrase = url.searchParams
-    .get("q")
-    ?.trim()
-    .replace(/\s+/g, " ")
-    .replace(/’/g, "'")
-    .toLowerCase();
+    if (submittedPhrase === "i'm sorry") {
+      return Response.redirect(
+        new URL("/backto/normal.htm", context.request.url),
+        302
+      );
+    }
 
-  if (submittedPhrase === "i'm sorry") {
     return Response.redirect(
-      new URL("/backto/normal.htm", context.request.url),
+      new URL(
+        "/spooky/asusual.htm?ignored=again",
+        context.request.url
+      ),
       302
     );
   }
 
-  return Response.redirect(
-    new URL("/spooky/asusual.htm?ignored=again", context.request.url),
-    302
-  );
-}
-  
   // Redirect the tempting Level 8 wrong answer to a hint image.
   if (url.pathname === "/madfire/screen8.zip") {
     return Response.redirect(
@@ -74,13 +98,13 @@ if (url.pathname === "/spooky/search.htm") {
       password: context.env.LEVEL11_PASSWORD,
       realm: "Level 11"
     },
-   
+
     "/serendipity/vermeer.htm": {
       username: context.env.LEVEL16_USERNAME,
       password: context.env.LEVEL16_PASSWORD,
       realm: "Level 16"
     },
-    
+
     "/spooky/island.htm": {
       username: context.env.LEVEL20_USERNAME,
       password: context.env.LEVEL20_PASSWORD,
@@ -93,7 +117,7 @@ if (url.pathname === "/spooky/search.htm") {
       realm: "Level 22"
     },
 
-     "/spooky/frizzle.htm": {
+    "/spooky/frizzle.htm": {
       username: context.env.LEVEL23_USERNAME,
       password: context.env.LEVEL23_PASSWORD,
       realm: "Level 23"
@@ -108,21 +132,27 @@ if (url.pathname === "/spooky/search.htm") {
     "/juniper/mittens.htm": {
       username: context.env.LEVEL33_USERNAME,
       password: context.env.LEVEL33_PASSWORD,
-      realm: "Level 32"
+      realm: "Level 33"
     },
 
     "/juniper/single.htm": {
       username: context.env.LEVEL34_USERNAME,
       password: context.env.LEVEL34_PASSWORD,
-      realm: "Level 32"
+      realm: "Level 34"
     },
+
+    "/juniper/dollar.htm": {
+      username: context.env.LEVEL35_USERNAME,
+      password: context.env.LEVEL35_PASSWORD,
+      realm: "Level 35"
+    }
   };
 
   const protectedPage = protectedPages[url.pathname];
 
-  // Allow pages and files that aren't listed above.
+  // Unprotected pages still receive the favicon.
   if (!protectedPage) {
-    return context.next();
+    return serveWithFavicon(context);
   }
 
   const authorization =
@@ -148,7 +178,7 @@ if (url.pathname === "/spooky/search.htm") {
       username === protectedPage.username &&
       password === protectedPage.password
     ) {
-      return context.next();
+      return serveWithFavicon(context);
     }
   } catch (error) {
     // Invalid authorization information
@@ -169,4 +199,3 @@ function requestPassword(realm) {
     }
   });
 }
-
