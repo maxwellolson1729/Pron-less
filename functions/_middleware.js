@@ -112,6 +112,12 @@ if (url.pathname === "/spooky/search.htm") {
       password: context.env.LEVEL33_PASSWORD,
       realm: "Level 32"
     },
+
+    "/juniper/single.htm": {
+      username: context.env.LEVEL34_USERNAME,
+      password: context.env.LEVEL34_PASSWORD,
+      realm: "Level 32"
+    },
   };
 
   const protectedPage = protectedPages[url.pathname];
