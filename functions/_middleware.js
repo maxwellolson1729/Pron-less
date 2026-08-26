@@ -7,22 +7,6 @@ const faviconRewriter = new HTMLRewriter().on("head", {
   }
 });
 
-async function serveWithFavicon(context) {
-  const response = await context.next();
-  const contentType =
-    response.headers.get("Content-Type") || "";
-
-  // Only rewrite actual HTML pages.
-  if (!contentType.toLowerCase().includes("text/html")) {
-    return response;
-  }
-
-  return faviconRewriter.transform(response);
-}
-
-export async function onRequest(context) {
-  const url = new URL(context.request.url);
-
   // Level 29: apologize to the Google box.
   if (url.pathname === "/spooky/search.htm") {
     const submittedPhrase = url.searchParams
