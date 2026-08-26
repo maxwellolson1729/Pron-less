@@ -1,11 +1,5 @@
-const faviconRewriter = new HTMLRewriter().on("head", {
-  element(element) {
-    element.append(
-      '<link rel="icon" type="image/x-icon" href="/favicon.ico?v=1">',
-      { html: true }
-    );
-  }
-});
+export async function onRequest(context) {
+  const url = new URL(context.request.url);
 
   // Level 29: apologize to the Google box.
   if (url.pathname === "/spooky/search.htm") {
@@ -134,9 +128,9 @@ const faviconRewriter = new HTMLRewriter().on("head", {
 
   const protectedPage = protectedPages[url.pathname];
 
-  // Unprotected pages still receive the favicon.
+  // Allow pages and files that aren't listed above.
   if (!protectedPage) {
-    return serveWithFavicon(context);
+    return context.next();
   }
 
   const authorization =
@@ -162,7 +156,7 @@ const faviconRewriter = new HTMLRewriter().on("head", {
       username === protectedPage.username &&
       password === protectedPage.password
     ) {
-      return serveWithFavicon(context);
+      return context.next();
     }
   } catch (error) {
     // Invalid authorization information
