@@ -2,8 +2,6 @@ export async function onRequest(context) {
   const url = new URL(context.request.url);
 
 // Level 29: apologize to the Google box.
-// Place this inside onRequest(), immediately after:
-// const url = new URL(context.request.url);
 
 if (url.pathname === "/spooky/search.htm") {
   const submittedPhrase = url.searchParams
