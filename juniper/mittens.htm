@@ -1,0 +1,35 @@
+<html>
+<head>
+<LINK REL="stylesheet" TYPE="text/css" HREF="/style.css">
+<title>2D</title>
+<audio src="sound1.mp3" autoplay loop></audio>
+<style>
+body{margin:0;background:#000}
+#level{position:relative;display:inline-block;margin:30px;line-height:0;border:1px solid #fff0a8;box-shadow:0 0 8px 2px rgba(255,226,112,.75)}
+#level img{display:block;width:600px;max-width:calc(100vw - 62px);height:auto}
+#next{position:absolute;top:14px;left:17px;color:#fff;font:bold 30px Arial;line-height:1;text-decoration:none;text-shadow:-1px -1px #000,1px -1px #000,-1px 1px #000,1px 1px #000}
+#print{display:none}
+@media print{
+body{background:#fff!important;color:#000!important}
+#level,audio{display:none!important}
+#print{display:block!important;color:#000!important;font:18pt Arial;text-align:left}
+#print p{margin:0 0 12px}
+.u:after{content:"\004d\006f\0068\0027\0073\0020\0031\0030"}
+.p:after{content:"\0063\0074\0072\006c\002b\0063"}
+}
+</style>
+</head>
+<body>
+<center>
+<div id="level">
+<img src="screen34.jpg" border="0">
+<a id="next" href="/juniper/single.htm">34</a>
+</div>
+</center>
+<div id="print">
+<p>U: <span class="u"></span></p>
+<p>P: <span class="p"></span></p>
+</div>
+<!-- this looked better on paper... -->
+</body>
+</html>
