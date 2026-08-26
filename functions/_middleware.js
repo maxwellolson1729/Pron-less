@@ -123,7 +123,13 @@ export async function onRequest(context) {
       username: context.env.LEVEL35_USERNAME,
       password: context.env.LEVEL35_PASSWORD,
       realm: "Level 35"
-    }
+    },
+  
+    "/juniper/preview.htm": {
+      username: context.env.LEVEL36_USERNAME,
+      password: context.env.LEVEL36_PASSWORD,
+      realm: "Level 36"
+    },
   };
 
   const protectedPage = protectedPages[url.pathname];
