@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stay Tuned, Puzzlers</title>
+  <title>Stay Tuned</title>
 
   <style>
     * {
@@ -73,13 +72,27 @@
       content: "~";
     }
 
+    .start-section {
+      margin: 1em 0;
+      text-align: center;
+    }
+
+    .start-row {
+      position: relative;
+      display: inline-block;
+    }
+
     .version {
+      position: absolute;
+      top: 50%;
+      left: 100%;
       margin-left: 0.65em;
       color: #666;
       font-size: 0.85rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       white-space: nowrap;
+      transform: translateY(-50%);
     }
 
     a {
@@ -162,13 +175,15 @@
 
     <img class="logo" src="/gopuzzler-logo.png" alt="GoPuzzler">
 
-    <h1>Stay tuned, puzzlers</h1>
+    <h1>Stay tuned</h1>
     <p class="update-note">Levels added often</p>
 
-    <p>
-      <a href="/thepuzzle/index.htm">Start Puzzle</a>
-      <span class="version">Beta 0.4.3</span>
-    </p>
+    <div class="start-section">
+      <span class="start-row">
+        <a href="/thepuzzle/index.htm">Start Puzzle</a>
+        <span class="version">Beta 0.4.3</span>
+      </span>
+    </div>
 
     <a href="resources/">Resources</a>
 
