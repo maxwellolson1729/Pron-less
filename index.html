@@ -72,12 +72,14 @@
       content: "~";
     }
 
-    .start-section {
+    .start-section,
+    .donate-section {
       margin: 1em 0;
       text-align: center;
     }
 
-    .start-row {
+    .start-row,
+    .donate-row {
       position: relative;
       display: inline-block;
     }
@@ -108,21 +110,17 @@
       text-shadow: 0 0 8px #fff;
     }
 
-    .donate-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 11px;
-      margin: 1em 0;
-    }
-
     .bmc-widget-slot {
+      position: absolute;
+      top: 50%;
+      left: 100%;
       display: inline-flex;
       width: 34px;
       height: 34px;
-      flex: 0 0 34px;
+      margin-left: 11px;
       align-items: center;
       justify-content: center;
+      transform: translateY(-50%);
     }
 
     .bmc-widget-slot #bmc-wbtn {
@@ -191,17 +189,19 @@
       <a href="/FAQ/">FAQ</a>
     </p>
 
-    <div class="donate-row">
-      <a
-        href="https://buymeacoffee.com/puzzledpuzzler"
-        target="_blank"
-        rel="noopener noreferrer"
-      >Donate</a>
+    <div class="donate-section">
+      <span class="donate-row">
+        <a
+          href="https://buymeacoffee.com/puzzledpuzzler"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Donate</a>
 
-      <span
-        class="bmc-widget-slot"
-        id="bmc-widget-slot"
-      ></span>
+        <span
+          class="bmc-widget-slot"
+          id="bmc-widget-slot"
+        ></span>
+      </span>
     </div>
   </main>
 
