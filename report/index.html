@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Report a Broken Level — GoPuzzler</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: "Courier New", monospace;
+    }
+
+    main {
+      width: min(720px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 60px 0 90px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+    }
+
+    .intro {
+      margin: 0 auto 42px;
+      color: #aaa;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    nav,
+    .back-link {
+      text-align: center;
+    }
+
+    nav {
+      margin-bottom: 45px;
+    }
+
+    .back-link {
+      margin-top: 48px;
+    }
+
+    a {
+      color: #aaa;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: #fff;
+      text-shadow: 0 0 8px #fff;
+    }
+
+    form {
+      padding: 28px;
+      border: 1px solid #6f6a3a;
+      background: #050505;
+      box-shadow: 0 0 12px rgba(214, 204, 105, 0.18);
+    }
+
+    .field {
+      margin-bottom: 24px;
+    }
+
+    label,
+    legend {
+      display: block;
+      margin-bottom: 8px;
+      color: #ddd;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+
+    .optional {
+      color: #777;
+      font-size: 0.85rem;
+      font-weight: normal;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      font: inherit;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #555;
+      border-radius: 0;
+      background: #111;
+      color: #fff;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #d6cc69;
+      outline: 1px solid #d6cc69;
+      box-shadow: 0 0 8px rgba(214, 204, 105, 0.25);
+    }
+
+    fieldset {
+      margin: 0 0 26px;
+      padding: 0;
+      border: 0;
+    }
+
+    .check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 10px 0;
+      color: #aaa;
+      font-weight: normal;
+    }
+
+    .check input {
+      margin-top: 0.2em;
+    }
+
+    .privacy-note {
+      margin: 0 0 26px;
+      color: #888;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    button {
+      display: block;
+      margin: 4px auto 0;
+      padding: 11px 22px;
+      border: 1px solid #777;
+      border-radius: 0;
+      background: #111;
+      color: #ddd;
+      cursor: pointer;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    button:hover,
+    button:focus-visible {
+      border-color: #d6cc69;
+      color: #fff;
+      text-shadow: 0 0 8px #fff;
+      box-shadow: 0 0 8px rgba(214, 204, 105, 0.25);
+    }
+
+    .honeypot {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 520px) {
+      form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <nav><a href="/FAQ/">FAQ</a></nav>
+
+    <h1>Report a Broken Level</h1>
+    <p class="intro">If GoPuzzler appears to be fighting the browser instead of the player, tell me what happened. Reports are private, so include whatever details are needed to describe the problem.</p>
+
+    <form action="https://formspree.io/f/moeqqvvl" method="POST">
+      <input type="hidden" name="_subject" value="GoPuzzler broken level report">
+
+      <div class="honeypot" aria-hidden="true">
+        <label for="company">Leave this field empty</label>
+        <input type="text" id="company" name="_gotcha" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="level">Level number or page URL</label>
+        <input type="text" id="level" name="level_or_url" placeholder="Example: Level 41 or /cute/kibble.htm" required>
+      </div>
+
+      <div class="field">
+        <label for="browser">Browser</label>
+        <select id="browser" name="browser" required>
+          <option value="" selected disabled>Select one</option>
+          <option>Chrome</option>
+          <option>Firefox</option>
+          <option>Safari</option>
+          <option>Edge</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="device">Device and operating system</label>
+        <input type="text" id="device" name="device_and_os" placeholder="Example: MacBook, macOS 15" required>
+      </div>
+
+      <div class="field">
+        <label for="expected">What did you expect to happen?</label>
+        <textarea id="expected" name="expected_behavior" required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="happened">What happened instead?</label>
+        <textarea id="happened" name="actual_behavior" required></textarea>
+      </div>
+
+      <fieldset>
+        <legend>What have you already tried? <span class="optional">(optional)</span></legend>
+        <label class="check"><input type="checkbox" name="tried_refresh" value="yes"> Refreshed or hard-refreshed the page</label>
+        <label class="check"><input type="checkbox" name="tried_private_window" value="yes"> Opened the page in a private window</label>
+        <label class="check"><input type="checkbox" name="tried_another_browser" value="yes"> Tried another browser</label>
+      </fieldset>
+
+      <div class="field">
+        <label for="details">Anything else you noticed? <span class="optional">(optional)</span></label>
+        <textarea id="details" name="additional_details"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="email">Your email <span class="optional">(optional, only if you want a reply)</span></label>
+        <input type="email" id="email" name="email" autocomplete="email">
+      </div>
+
+      <p class="privacy-note">Please do not submit passwords used anywhere outside GoPuzzler. Puzzle answers are fine when they are necessary to explain the problem.</p>
+
+      <button type="submit">Send Report</button>
+    </form>
+
+    <div class="back-link"><a href="/">Back Home</a></div>
+  </main>
+</body>
+</html>
