@@ -26,6 +26,21 @@
       padding: 30px;
     }
 
+    .presented-by {
+      margin: 0 0 3px;
+      color: #c8b85a;
+      font-family:
+        "Brittany Signature",
+        "Brittany",
+        "Snell Roundhand",
+        "Brush Script MT",
+        cursive;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      font-weight: normal;
+      letter-spacing: 0.03em;
+      text-shadow: 0 0 7px rgba(200, 184, 90, 0.3);
+    }
+
     .logo {
       display: block;
       width: min(520px, 82vw);
@@ -43,10 +58,19 @@
 
     .update-note {
       margin: 0 0 36px;
-      color: #777;
-      font-size: 0.9rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      color: #aaa17a;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1rem;
+      font-style: italic;
+      letter-spacing: 0.06em;
+      text-transform: lowercase;
+    }
+
+    .update-note::before,
+    .update-note::after {
+      margin: 0 0.45em;
+      color: #625d43;
+      content: "~";
     }
 
     .version {
@@ -59,7 +83,7 @@
     }
 
     a {
-      color: #aaa;
+      color: #bdbdbd;
       font-size: 1.1rem;
       letter-spacing: 0.15em;
       text-decoration: none;
@@ -70,11 +94,73 @@
       color: #fff;
       text-shadow: 0 0 8px #fff;
     }
+
+    .donate-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      margin: 1em 0;
+    }
+
+    .bmc-widget-slot {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /*
+      The widget normally anchors itself to the bottom-right corner.
+      Once JavaScript moves it into the slot, these rules make it small
+      enough to sit beside the Donate link.
+    */
+
+    .bmc-widget-slot #bmc-wbtn {
+      position: static !important;
+      right: auto !important;
+      bottom: auto !important;
+      width: 34px !important;
+      height: 34px !important;
+      border: 1px solid rgba(225, 214, 139, 0.55) !important;
+      border-radius: 50% !important;
+      box-shadow: 0 0 7px rgba(200, 184, 90, 0.28) !important;
+      transform: none !important;
+    }
+
+    .bmc-widget-slot #bmc-wbtn:hover {
+      box-shadow: 0 0 10px rgba(225, 214, 139, 0.6) !important;
+    }
+
+    .bmc-widget-slot #bmc-wbtn img {
+      width: 19px !important;
+      height: 19px !important;
+    }
+
+    /*
+      Since the launcher is no longer in the corner, center the payment
+      window when it opens.
+    */
+
+    #bmc-iframe {
+      top: 50% !important;
+      right: auto !important;
+      bottom: auto !important;
+      left: 50% !important;
+      max-width: calc(100vw - 32px) !important;
+      max-height: calc(100vh - 48px) !important;
+      transform: translate(-50%, -50%) !important;
+      transform-origin: center !important;
+    }
   </style>
 </head>
 
 <body>
   <main>
+    <p class="presented-by">puzzledpuzzler presents</p>
+
     <img class="logo" src="/gopuzzler-logo.png" alt="GoPuzzler">
 
     <h1>Stay tuned, puzzlers</h1>
@@ -91,13 +177,18 @@
       <a href="/FAQ/">FAQ</a>
     </p>
 
-    <p>
+    <div class="donate-row">
       <a
         href="https://buymeacoffee.com/puzzledpuzzler"
         target="_blank"
         rel="noopener noreferrer"
       >Donate</a>
-    </p>
+
+      <span
+        class="bmc-widget-slot"
+        id="bmc-widget-slot"
+      ></span>
+    </div>
   </main>
 
   <script
@@ -106,11 +197,52 @@
     src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
     data-id="puzzledpuzzler"
     data-description="Support GoPuzzler on Buy Me a Coffee!"
-    data-message="Help keep the web haunted."
+    data-message=""
     data-color="#c8b85a"
     data-position="Right"
     data-x_margin="18"
     data-y_margin="18">
+  </script>
+
+  <script>
+    (function () {
+      const slot = document.getElementById("bmc-widget-slot");
+
+      function placeCoffeeButton() {
+        const button = document.getElementById("bmc-wbtn");
+
+        if (!button || !slot) {
+          return false;
+        }
+
+        slot.appendChild(button);
+        button.setAttribute("role", "button");
+        button.setAttribute("tabindex", "0");
+        button.setAttribute("aria-label", "Open the GoPuzzler donation form");
+        button.setAttribute("title", "Help keep the web haunted");
+
+        button.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            button.click();
+          }
+        });
+
+        return true;
+      }
+
+      if (!placeCoffeeButton()) {
+        const observer = new MutationObserver(function () {
+          if (placeCoffeeButton()) {
+            observer.disconnect();
+          }
+        });
+
+        observer.observe(document.body, {
+          childList: true
+        });
+      }
+    }());
   </script>
 </body>
 </html>
