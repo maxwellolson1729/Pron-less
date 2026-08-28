@@ -112,12 +112,6 @@
       justify-content: center;
     }
 
-    /*
-      The widget normally anchors itself to the bottom-right corner.
-      Once JavaScript moves it into the slot, these rules make it small
-      enough to sit beside the Donate link.
-    */
-
     .bmc-widget-slot #bmc-wbtn {
       position: static !important;
       right: auto !important;
@@ -139,11 +133,6 @@
       height: 19px !important;
     }
 
-    /*
-      Since the launcher is no longer in the corner, center the payment
-      window when it opens.
-    */
-
     #bmc-iframe {
       top: 50% !important;
       right: auto !important;
@@ -153,6 +142,16 @@
       max-height: calc(100vh - 48px) !important;
       transform: translate(-50%, -50%) !important;
       transform-origin: center !important;
+    }
+
+    #bmc-iframe[style*="opacity: 0"] {
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    #bmc-iframe[style*="opacity: 1"] {
+      visibility: visible !important;
+      pointer-events: auto !important;
     }
   </style>
 </head>
@@ -218,7 +217,10 @@
         slot.appendChild(button);
         button.setAttribute("role", "button");
         button.setAttribute("tabindex", "0");
-        button.setAttribute("aria-label", "Open the GoPuzzler donation form");
+        button.setAttribute(
+          "aria-label",
+          "Open the GoPuzzler donation form"
+        );
         button.setAttribute("title", "Help keep the web haunted");
 
         button.addEventListener("keydown", function (event) {
