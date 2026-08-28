@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,11 +34,28 @@
     }
 
     h1 {
-      margin: 0 0 40px;
-      font-size: clamp(2.5rem, 8vw, 6rem);
+      margin: 0 0 8px;
+      font-size: clamp(1.5rem, 4vw, 2.75rem);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+    }
+
+    .update-note {
+      margin: 0 0 36px;
+      color: #777;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .version {
+      margin-left: 0.65em;
+      color: #666;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     a {
@@ -61,8 +77,10 @@
   <main>
     <img class="logo" src="/gopuzzler-logo.png" alt="GoPuzzler">
     <h1>Stay tuned, puzzlers</h1>
+    <p class="update-note">Levels added often</p>
     <p>
       <a href="/thepuzzle/index.htm">Start Puzzle</a>
+      <span class="version">Beta 0.4.3</span>
     </p>
     <a href="resources/">Resources</a>
     <p>
@@ -71,4 +89,3 @@
   </main>
 </body>
 </html>
-
