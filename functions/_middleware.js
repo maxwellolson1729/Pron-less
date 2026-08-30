@@ -143,7 +143,7 @@ export async function onRequest(context) {
       realm: "Level 41"
     },
 
-     "/velvet/index.html": {
+     "/velvet/": {
       username: context.env.LEVEL45_USERNAME,
       password: context.env.LEVEL45_PASSWORD,
       realm: "Level 45"
