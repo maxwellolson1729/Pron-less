@@ -149,6 +149,12 @@ export async function onRequest(context) {
       password: context.env.LEVEL45_PASSWORD,
       realm: "Level 45"
     },
+
+     "/velvet/fabulous.htm": {
+      username: context.env.LEVEL46_USERNAME,
+      password: context.env.LEVEL46_PASSWORD,
+      realm: "Level 46"
+    },
   };
 
   const protectedPage = protectedPages[url.pathname];
