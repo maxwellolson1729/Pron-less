@@ -17,6 +17,7 @@ export async function onRequest(context) {
       );
     }
 
+    
     return Response.redirect(
       new URL(
         "/spooky/asusual.htm?ignored=again",
