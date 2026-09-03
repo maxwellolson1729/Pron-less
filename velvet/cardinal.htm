@@ -1,0 +1,95 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Okay, what just happened?</title>
+  <link rel="stylesheet" type="text/css" href="cardinal.css" />
+  <script src="cardinal.js" defer></script>
+</head>
+
+<body>
+
+<main>
+  <header>
+    <p class="tiny-title">LEVEL 52: EXPLAINED</p>
+    <h1>Okay, what the hell just happened?</h1>
+    <p class="opening">You found <b>CARDINAL</b>, so clearly you figured out at least most of this. Here is what I made you do and why. Sorry in advance.</p>
+  </header>
+
+  <section class="note pharaoh-note">
+    <div>
+      <h2>First, the filenames.</h2>
+      <p>The page gave you <code>shuffle-a.jpg</code>. Changing the last letter found B through H. If you got curious and tried I, you found this extremely helpful gentleman.</p>
+      <p><b>Pharaoh. Faro.</b> Yes, that was the joke. No, I will not apologize for that part.</p>
+    </div>
+    <img src="shuffle-i.jpg" alt="The Egyptian figure hidden in shuffle-i.jpg">
+  </section>
+
+  <section>
+    <h2>So, what is a Faro shuffle?</h2>
+    <p>A perfect Faro shuffle starts by cutting a 52-card deck exactly in half: 26 cards and 26 cards. You then interleave the halves perfectly, alternating one card from each packet.</p>
+    <p>This puzzle uses an <b>out-shuffle</b>, which means the original top card stays on top. Do that eight times and the entire deck returns to exactly where it started. Cards are apparently very committed to the bit.</p>
+
+    <div class="shuffle-demo" aria-label="Animation showing two packets being perfectly interleaved">
+      <p class="demo-caption">26 cards + 26 cards</p>
+      <div class="packet packet-one" aria-hidden="true"><span>A♠</span><span>2♠</span><span>3♠</span><span>4♠</span><span>5♠</span></div>
+      <div class="packet packet-two" aria-hidden="true"><span class="red">A♥</span><span class="red">2♥</span><span class="red">3♥</span><span class="red">4♥</span><span class="red">5♥</span></div>
+      <div class="mixed" aria-hidden="true"><span>A♠</span><span class="red">A♥</span><span>2♠</span><span class="red">2♥</span><span>3♠</span><span class="red">3♥</span><span>4♠</span><span class="red">4♥</span><span>5♠</span><span class="red">5♥</span></div>
+      <button class="replay" type="button">Do the shuffle again</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>The pictures were out of order.</h2>
+    <p>You found eight arrangements of the same deck. One was completely ordered. That was the starting point. Repeating the perfect out-shuffle and matching each result to a photograph gave you the real order:</p>
+
+    <div class="photo-strip">
+      <figure><img src="shuffle-d.jpg" alt="Shuffle D"><figcaption>1. D</figcaption></figure>
+      <figure><img src="shuffle-f.jpg" alt="Shuffle F"><figcaption>2. F</figcaption></figure>
+      <figure><img src="shuffle-b.jpg" alt="Shuffle B"><figcaption>3. B</figcaption></figure>
+      <figure><img src="shuffle-h.jpg" alt="Shuffle H"><figcaption>4. H</figcaption></figure>
+      <figure><img src="shuffle-e.jpg" alt="Shuffle E"><figcaption>5. E</figcaption></figure>
+      <figure><img src="shuffle-a.jpg" alt="Shuffle A"><figcaption>6. A</figcaption></figure>
+      <figure><img src="shuffle-g.jpg" alt="Shuffle G"><figcaption>7. G</figcaption></figure>
+      <figure><img src="shuffle-c.jpg" alt="Shuffle C"><figcaption>8. C</figcaption></figure>
+    </div>
+
+    <p class="big-order">D · F · B · H · E · A · G · C</p>
+  </section>
+
+  <section class="note">
+    <h2>Then there were the upside-down cards.</h2>
+    <p>Each photograph had exactly one card facing the wrong way. Once the photos were ordered, those cards were ordered too.</p>
+    <p>The card rank chose a position from 1–13. Black used the first half of the alphabet, A–M. Red used the second half, N–Z. Because apparently simply spelling the answer would have been too polite.</p>
+
+    <div class="color-key">
+      <span><b>♣ BLACK</b> = A–M</span>
+      <span class="red"><b>♥ RED</b> = N–Z</span>
+    </div>
+
+    <div class="decoder">
+      <div><i>3♣</i><small>D</small><b>C</b></div>
+      <div><i>A♠</i><small>F</small><b>A</b></div>
+      <div><i class="red">5♥</i><small>B</small><b>R</b></div>
+      <div><i>4♠</i><small>H</small><b>D</b></div>
+      <div><i>9♣</i><small>E</small><b>I</b></div>
+      <div><i class="red">A♥</i><small>A</small><b>N</b></div>
+      <div><i>A♠</i><small>G</small><b>A</b></div>
+      <div><i>Q♣</i><small>C</small><b>L</b></div>
+    </div>
+
+    <p class="answer">CARDINAL</p>
+  </section>
+
+  <section class="fairness">
+    <h2>Was this level fair?</h2>
+    <div class="fair-buttons">
+      <button type="button" data-answer="yes">Yes</button>
+      <button type="button" data-answer="no">No</button>
+    </div>
+    <p id="fair-response" role="status" aria-live="polite"></p>
+    <a id="continue-button" href="/evil/index.html">Continue →</a>
+  </section>
+</main>
+
+</body>
+</html>
