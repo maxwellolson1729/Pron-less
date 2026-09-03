@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  padding: 8px;
+  background: #000;
+  color: #fff;
+}
+
+.level52-stage {
+  position: relative;
+  display: inline-block;
+  width: min(94vw, 808px);
+  margin: 18px auto 0;
+  line-height: 0;
+}
+
+.level-number {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  z-index: 2;
+  color: #fff;
+  font: bold 26px Arial, Helvetica, sans-serif;
+  line-height: 30px;
+  text-decoration: none;
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+.main-shuffle {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  border: 1px solid #f1db6d;
+  box-shadow: 0 0 9px rgba(255, 226, 92, 0.58);
+}
