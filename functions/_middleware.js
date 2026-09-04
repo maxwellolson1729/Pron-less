@@ -162,6 +162,12 @@ export async function onRequest(context) {
       password: context.env.LEVEL51_PASSWORD,
       realm: "Level 51"
     },
+
+     "/easy/wicker.htm": {
+      username: context.env.LEVEL54_USERNAME,
+      password: context.env.LEVEL54_PASSWORD,
+      realm: "Level 54"
+    },
   };
 
   const protectedPage = protectedPages[url.pathname];
